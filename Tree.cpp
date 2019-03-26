@@ -140,7 +140,6 @@ int ariel::TreeNode::minVal() {
 
 
 int ariel::TreeNode::parent(int i) {
-  if(_root != NULL){
     if(i<_value){
         if(_left->value() == i) return _value;
         else return _left->parent(i);
@@ -149,7 +148,6 @@ int ariel::TreeNode::parent(int i) {
         if(_right->value() == i) return _value;
         else return _right->parent(i);
     }
-  }
 }
 
 int ariel::TreeNode::left(int i) {
@@ -175,11 +173,9 @@ int ariel::TreeNode::right(int i) {
 }
 
 ariel::TreeNode* ariel::TreeNode::getByValue(int i) {
-    if(_root != NULL){
     if(i==_value) return this;
     else if(i<_value) return _left->getByValue(i);
     else return _right->getByValue(i);
-  }
 }
 
 
