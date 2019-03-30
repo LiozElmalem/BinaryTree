@@ -64,8 +64,9 @@ ariel::Tree& ariel::Tree::remove(int i) {
     else{
     ariel::TreeNode* deleted = _root->getByValue(i);
     _root = _root->remove(i);
-    deleted->RemoveChild();
-    delete deleted;
+    //deleted->RemoveChild();
+    //delete deleted;
+      deleted = NULL;
     }
     return *this;
 }
