@@ -143,6 +143,7 @@ ariel::TreeNode* ariel::TreeNode::remove(int i) {
     }
   }
   else {
+    cout<<"Exception,the value not exist for remove it"<<endl;
     throw std::invalid_argument("Exception,the value not exist for remove it");
   }
   return this;
