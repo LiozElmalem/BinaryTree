@@ -20,6 +20,13 @@ namespace ariel{
         void print();
         TreeNode* getByValue(int i);
         void RemoveChild();
+        
+          void setRight(TreeNode* x){
+          _right = x;
+        }
+        void setLeft(TreeNode* x){
+          _left = x;
+        }
 
     private:
         int _value;
