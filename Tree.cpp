@@ -5,11 +5,11 @@ using namespace std;
 
 ariel::Tree::Tree():_root(NULL) {}
 ariel::Tree::~Tree(){
-    delete _root;
+  delete _root;
 }
 
 int ariel::Tree::root() {
-    if(_root == NULL) {throw std::invalid_argument("Exception,the tree is empty");} 
+    if(_root == NULL) {throw std::invalid_argument("Exception,the tree is empty");} //empty tree exception
     return _root->value();
 }
 
@@ -45,13 +45,13 @@ bool ariel::Tree::contains(int i) {
 
 
 int ariel::Tree::parent(int i) {
-    if(_root == NULL||_root->value()==i) {throw std::invalid_argument("no such element exception");}
+    if(_root == NULL||_root->value()==i) {throw std::invalid_argument("Exception");}//no such element exception
     else return _root->parent(i);
 }
 
 
 ariel::Tree& ariel::Tree::insert(int i) {
-    if(contains(i)) {throw std::invalid_argument("already exsists exception");}
+    if(contains(i)) {throw std::invalid_argument("Exception");}//throws already exsists exception
     if(_root == NULL) _root = new TreeNode(i);
     else _root = _root->insert(i);
     return *this;
