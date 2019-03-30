@@ -125,7 +125,7 @@ ariel::TreeNode* ariel::TreeNode::remove(int i) {
         if(_left == NULL && _right != NULL) return _right;
         else if(_right == NULL && _left != NULL) return  _left;
         else if( _right == NULL && _left == NULL){
-          
+          delete this;
         }
         else{
             int minVal = _right->minVal();
