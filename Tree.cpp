@@ -5,7 +5,7 @@ using namespace std;
 
 ariel::Tree::Tree():_root(NULL) {}
 ariel::Tree::~Tree(){
-  delete _root;
+    delete _root;
 }
 
 int ariel::Tree::root() {
@@ -60,11 +60,11 @@ ariel::Tree& ariel::Tree::insert(int i) {
 ariel::Tree& ariel::Tree::remove(int i) {
     if(!contains(i)){throw std::invalid_argument("Exception");}
     else{
-    ariel::TreeNode* deleted = _root->getByValue(i);
+    // ariel::TreeNode* deleted = _root->getByValue(i);
     _root = _root->remove(i);
-    deleted->RemoveChild();
+    // deleted->RemoveChild();
     // delete deleted;
-    deleted = NULL;
+    // deleted = NULL;
     }
     return *this;
 }
@@ -143,7 +143,6 @@ ariel::TreeNode* ariel::TreeNode::remove(int i) {
     }
   }
   else {
-    cout<<"Exception,the value not exist for remove it"<<endl;
     throw std::invalid_argument("Exception,the value not exist for remove it");
   }
   return this;
