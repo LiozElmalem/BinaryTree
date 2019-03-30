@@ -9,14 +9,14 @@ ariel::Tree::~Tree(){
 }
 
 int ariel::Tree::root() {
-    if(_root == NULL) {throw std::invalid_argument("Exception");} //empty tree exception
+    if(_root == NULL) {throw std::invalid_argument("Exception,the tree is empty");} 
     return _root->value();
 }
 
 
 int ariel::Tree::left(int i) {
     if(!contains(i)){
-      throw std::invalid_argument("Exception");
+      throw std::invalid_argument("Exception, i value not exist in this tree");
     }
     return _root->left(i);
 }
@@ -24,7 +24,7 @@ int ariel::Tree::left(int i) {
 
 int ariel::Tree::right(int i) {
     if(!contains(i)){
-      throw std::invalid_argument("Exception");
+      throw std::invalid_argument("Exception, i value not exist in this tree");
     }
     return _root->right(i);
 }
@@ -45,13 +45,13 @@ bool ariel::Tree::contains(int i) {
 
 
 int ariel::Tree::parent(int i) {
-    if(_root == NULL||_root->value()==i) {throw std::invalid_argument("Exception");}//no such element exception
+    if(_root == NULL||_root->value()==i) {throw std::invalid_argument("no such element exception");}
     else return _root->parent(i);
 }
 
 
 ariel::Tree& ariel::Tree::insert(int i) {
-    if(contains(i)) {throw std::invalid_argument("Exception");}//throws already exsists exception
+    if(contains(i)) {throw std::invalid_argument("already exsists exception");}
     if(_root == NULL) _root = new TreeNode(i);
     else _root = _root->insert(i);
     return *this;
@@ -62,7 +62,7 @@ ariel::Tree& ariel::Tree::remove(int i) {
     else{
     ariel::TreeNode* deleted = _root->getByValue(i);
     _root = _root->remove(i);
-    // deleted->RemoveChild();
+    deleted->RemoveChild();
     // delete deleted;
     deleted = NULL;
     }
@@ -70,11 +70,13 @@ ariel::Tree& ariel::Tree::remove(int i) {
 }
 
 void ariel::Tree::print() {
-    if(_root!= NULL) {
-        _root->print();
-        std::cout<<std::endl;
+  if(_root != NULL){
+      _root->print();
+      cout<<""<<endl;
     }
-    else throw std::invalid_argument("Exception");
+    else{
+      throw std::invalid_argument("Exception");
+    }
 }
 
 ariel::TreeNode::TreeNode(int val):_value(val),_right(NULL),_left(NULL) {}
@@ -105,6 +107,7 @@ int ariel::TreeNode::size() {
 }
 
 ariel::TreeNode* ariel::TreeNode::insert(int i) {
+  if(!contains(i)){
     if(i<_value){
         if(_left == NULL) _left = new TreeNode(i);
         else _left = _left->insert(i);
@@ -114,15 +117,22 @@ ariel::TreeNode* ariel::TreeNode::insert(int i) {
         else _right = _right->insert(i);
     }
     return this;
+  }
+  else{
+    throw std::invalid_argument("Exception");
+  }
 }
 
 ariel::TreeNode* ariel::TreeNode::remove(int i) {
+    if(contains(i)){
     if(i<_value) _left = _left->remove(i);
     else if(i>_value) _right = _right->remove(i);
     else{
         if(_left == NULL && _right != NULL) return _right;
         else if(_right == NULL && _left != NULL) return  _left;
         else if( _right == NULL && _left == NULL){
+          TreeNode* temp = this;
+          delete temp;
           return this;
         }
         else{
@@ -131,7 +141,12 @@ ariel::TreeNode* ariel::TreeNode::remove(int i) {
           setRight(_right->remove(minVal));
         }
     }
-    return this;
+  }
+  else {
+    cout<<"Exception,the value not exist for remove it"<<endl;
+    throw std::invalid_argument("Exception,the value not exist for remove it");
+  }
+  return this;
 }
 
 int ariel::TreeNode::minVal() {
@@ -141,6 +156,7 @@ int ariel::TreeNode::minVal() {
 
 
 int ariel::TreeNode::parent(int i) {
+  if(contains(i)){
     if(i<_value){
         if(_left->value() == i) return _value;
         else return _left->parent(i);
@@ -148,6 +164,10 @@ int ariel::TreeNode::parent(int i) {
     else{
         if(_right->value() == i) return _value;
         else return _right->parent(i);
+      }
+  }
+  else{
+    throw std::invalid_argument("Exception");
   }
 }
 
@@ -174,9 +194,14 @@ int ariel::TreeNode::right(int i) {
 }
 
 ariel::TreeNode* ariel::TreeNode::getByValue(int i) {
+  if(contains(i)){
     if(i==_value) return this;
     else if(i<_value) return _left->getByValue(i);
     else return _right->getByValue(i);
+  }
+  else{
+    throw std::invalid_argument("Exception");
+  }
 }
 
 
@@ -190,4 +215,4 @@ void ariel::TreeNode::print() {
 void ariel::TreeNode::RemoveChild() {
     _left= NULL;
     _right= NULL;
-}
+  }
