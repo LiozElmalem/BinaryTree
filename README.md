@@ -7,7 +7,7 @@ present simple binary tree tutorial
 
 ### Grades:
 
-![](https://github.com/Elmalem/CPP-Assigments/blob/master/%E2%80%8F%E2%80%8FGrade.JPG?raw=true)
+![](https://github.com/Elmalem/CPP-Assigments/blob/master/%E2%80%8F%E2%80%8FGrades.JPG?raw=true)
 #  Binary search tree
 
 what is binary search tree and how it works?
